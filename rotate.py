@@ -109,14 +109,23 @@ for i in range(count):
 		CV.create_line(pos_x[i],pos_y[i],pos_x[i+1],pos_y[i+1] ,fill ='yellow',width=2)		
 CV.create_line(pos_x[11],pos_y[11],pos_x[0],pos_y[0] ,fill ='yellow',width=2)
 
+center = 220,390
+
+for i in range(0,-30,-1):
+	new_car = rotate(poly,i,center)
+	black_car = rotate(new_car,1,center)
+	car = CV.create_polygon(black_car,fill='black',outline='black')
+	car = CV.create_polygon(new_car,fill='blue',outline='red')	
+	time.sleep(0.05)
+	CV.update()
+
 for i in range(100):
 	CV.move(car,1,-1)
 	CV.update()
+	CV.tag_raise(car)
 	time.sleep(0.05)
 
-center = 320,290
-new_car = rotate(poly,30,center)
-car = CV.create_polygon(new_car,fill='blue',outline='red')	
+
 
 GUI.bind('<Button-1>',getposition)
 GUI.mainloop()
